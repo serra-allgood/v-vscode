@@ -1,33 +1,50 @@
 {
-	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-	"name": "V",
-	"patterns": [
-		{
-			"include": "#keywords"
-		},
-		{
-			"include": "#strings"
-		}
-	],
-	"repository": {
-		"keywords": {
-			"patterns": [{
-				"name": "keyword.control.v",
-				"match": "\\b(if|while|for|return|in|fn|const)\\b"
-			}]
-		},
-		"strings": {
-			"name": "string.quoted.single.v",
-			"begin": "'",
-			"end": "'",
-			"patterns": [
-				{
-					"name": "constant.character.escape.v",
-					"match": "\\\\."
-				}
-			]
-		}
-		
-	},
-	"scopeName": "text.html.v"
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "V",
+  "scopeName": "text.html.v",
+  "fileTypes": ["v"],
+  "patterns": [
+    {
+      "include": "#keywords"
+    },
+    {
+      "include": "#strings"
+    }
+  ],
+  "repository": {
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.control.v",
+          "match": "\\b(if|while|for|return|in|fn|struct)\\b"
+        },
+        {
+          "name": "comment.line.v",
+          "match": "(//.*$)"
+        },
+        {
+          "name": "storage.type.v",
+          "match": "\\b(int|string|bool|i8|i16|i32|i64|u8|u16|u32|u64|byte|rune|f32|f64)\\b"
+        }
+      ]
+    },
+    "strings": {
+      "patterns": [
+        {
+          "match": "'.*'",
+          "name": "string.quoted.v",
+          "captures": {
+            "0": {
+              "patterns": [
+                {
+                  "match": "\\$[\\w_\\d]+(\\.[\\w_\\d]*)*\\b",
+                  "name": "string.interpolated.v"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  }
 }
